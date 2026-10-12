@@ -29,13 +29,29 @@ This project estimates the causal effect of a growth mindset intervention on stu
 
 ## 📊 Key Findings
 
-- The intervention had a **positive causal effect** on achievement, with results robust across multiple estimators.
-- Uncertainty quantified via confidence intervals and graphical diagnostics.
+Dataset: 10,391 synthetic student records from 76 schools (32.6% treated); continuous achievement outcome `y` (standard deviation about 0.72).
+
+| Method | ATE | 95% CI |
+|:---|:---:|:---:|
+| Linear regression (covariate adjusted) | 0.413 | [0.388, 0.438] |
+| Inverse propensity weighting (IPW) | 0.415 | [0.387, 0.442] |
+| T-Learner (Random Forest) | 0.422 | [0.409, 0.434] |
+| T-Learner (XGBoost) | 0.422 | [0.410, 0.434] |
+| S-Learner (Random Forest) | 0.421 | [0.409, 0.434] |
+| S-Learner (XGBoost) | 0.421 | [0.411, 0.431] |
+| Causal Forest (EconML) | 0.415 | [0.208, 0.623] |
+
+(Values printed by notebooks `01` to `04` in `analysis/`; the regression and IPW point estimates are the midpoints of their reported intervals.)
+
+- The intervention had a **positive causal effect of about 0.41 to 0.42 outcome units** in every specification, so the result is robust to the choice of estimator.
+- The naive treated-vs-control difference is 0.457; covariate adjustment moves it to about 0.41.
+- The Causal Forest interval is much wider than the parametric and learner-based intervals.
+- The data is synthetic (modeled on the National Study of Learning Mindsets), so these numbers illustrate the method rather than describe real students.
 
 ## 🛠️ Tools & Languages
 
 - Python (Jupyter Notebooks)
-- pandas, matplotlib, scikit-learn, econml
+- pandas, matplotlib, scikit-learn, econml, xgboost
 - Git & GitHub
 
 ## 🧾 References
